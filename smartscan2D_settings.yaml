@@ -1,0 +1,109 @@
+TCP:
+  buffer_size: 8388608
+  host: localhost
+  port: 54333
+  timeout: 10
+acquisition_function:
+  function: acquisition_function_nd
+  params:
+    a: 0.1
+    c: 0
+    norm: 1
+    weights: null
+core:
+  fetch_data_clock: 50
+  master_clock: 500
+  n_threads: 4
+cost_function:
+  function: manhattan_avoid_repetition
+  params:
+    dead_time: 0.1
+    dwell_time: 2
+    min_distance: 4.99
+    speed: 300
+    weight: 0.01
+gp:
+  ask:
+    bounds: null
+    max_iter: 10
+    method: global
+    n: 1
+    pop_size: 20
+    tol: 1.0e-06
+  fvgp:
+    compute_device: cpu
+    gp_kernel_function: null
+    gp_mean_function: null
+    init_hyperparameters:
+    - 1000000
+    - 100
+    - 100
+    - 0.5
+    ram_economy: true
+    use_inv: false
+  optimizer:
+    output_space_dimension: 1
+  training:
+    hyperparameter_bounds:
+    - - 1000000
+      - 1000000000
+    - - 10
+      - 1000
+    - - 10
+      - 1000
+    - - 0.001
+      - 5
+    max_iter: 2
+    pop_size: 20
+    tolerance: 1.0e-06
+logging:
+  directory: null
+  formatter: '%(asctime)s | %(name)s | %(levelname)-8s | %(message)s'
+  level: INFO
+paths:
+  data: ./data
+plots:
+  posterior_map_shape:
+  - 50
+  - 50
+preprocessing: null
+scanning:
+  base_error: 0.01
+  duration: 3600
+  fixed_normalization:
+  - 1.0
+  - 1.0
+  initial_points_2D: hexgrid_19
+  initial_points_3D: border_25
+  max_points: 1000
+  merge_unique_positions: true
+  normalize_values: training
+  train_at:
+  - 10
+  - 20
+  - 50
+  - 100
+  - 200
+  - 500
+  - 1000
+  - 2000
+  - 5000
+  - 10000
+  train_every: 0
+tasks:
+  curvature:
+    function: curvature
+    params:
+      bw: 5
+      c1: 0.001
+      c2: 0.001
+      roi: &id001
+      - - 145
+        - 190
+      - - 10
+        - 140
+      w: 1
+  mean:
+    function: mean
+    params:
+      roi: *id001
